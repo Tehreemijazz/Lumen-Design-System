@@ -1,0 +1,113 @@
+
+@use 'sass:map';
+@use 'sass:math';
+
+// Compile-time design tokens (Sass) -> emitted as runtime CSS custom properties.
+
+$breakpoints: (
+    sm: 40rem,
+    md: 48rem,
+    lg: 64rem
+);
+
+$space: (
+    1: .25rem,
+    2: .5rem,
+    3: .75rem,
+    4: 1rem,
+    5: 1.5rem,
+    6: 2rem,
+    7: 3rem
+);
+
+$font-size: (
+    xs: .75rem,
+    sm: .875rem,
+    md: 1rem,
+    lg: 1.25rem,
+    xl: 1.563rem,
+    2xl: 1.953rem,
+    3xl: 2.441rem
+); // 1.25 scale
+
+$radius: (
+    sm: .25rem,
+    md: .5rem,
+    lg: .875rem,
+    pill: 999px
+);
+
+$shadow: (
+    sm: 0 1px 2px rgb(0 0 0 / .12),
+    md: 0 4px 12px rgb(0 0 0 / .14),
+    lg: 0 12px 32px rgb(0 0 0 / .22)
+);
+
+$status: (
+    primary,
+    secondary,
+    accent,
+    success,
+    warning,
+    danger,
+    info
+);
+
+$light: (
+    bg: #f6f7fb,
+    surface: #fff,
+    text: #14172b,
+    muted: #5b6178,
+    border: #dcdfeb,
+    on-fill: #fff,
+    primary: #3d4bd6,
+    secondary: #4b5468,
+    accent: #c2255c,
+    success: #17803d,
+    warning: #9a5b00,
+    danger: #c0262d,
+    info: #0b6a9e
+);
+
+$dark: (
+    bg: #0c0f1d,
+    surface: #151a2e,
+    text: #e8eaf4,
+    muted: #9aa1ba,
+    border: #2a3150,
+    on-fill: #0c0f1d,
+    primary: #8c97ff,
+    secondary: #a4adc4,
+    accent: #ff7aa8,
+    success: #4cd37f,
+    warning: #f5b84a,
+    danger: #ff7b80,
+    info: #5cc3f5
+);
+
+// Functions
+
+@function rem($px) {
+    @return math.div($px, 16) * 1rem;
+}
+
+// Mixins
+
+@mixin theme-vars($map) {
+    @each $k, $v in $map {
+        --color-#{$k}: #{$v};
+    }
+}
+
+@mixin bp($name) {
+    @media (min-width: map.get($breakpoints, $name)) {
+        @content;
+    }
+}
+
+@mixin focus-ring {
+    &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}

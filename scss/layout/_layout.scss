@@ -1,0 +1,26 @@
+
+.container {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.cq {
+  container-type: inline-size;
+} // host element for container queries
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}

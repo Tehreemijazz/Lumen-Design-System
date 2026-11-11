@@ -1,0 +1,71 @@
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+
+  &__title {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-lg);
+  }
+
+  &__meta {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+
+  &--stat &__value {
+    font: 700 var(--text-3xl)/1 var(--font-head);
+    color: var(--color-primary);
+  }
+
+  &--pricing {
+    text-align: center;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-4) 0;
+      color: var(--color-muted);
+    }
+  }
+
+  &--pricing &__price {
+    font: 700 var(--text-3xl)/1 var(--font-head);
+  }
+
+  &--featured {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  text-align: center;
+
+  &__avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--color-accent);
+    color: var(--color-on-fill);
+    font-weight: 700;
+    flex: none;
+  }
+}
+
+// Container query: responds to the card's own width, not the viewport.
+@container (min-width: 26rem) {
+  .profile {
+    flex-direction: row;
+    text-align: left;
+  }
+}

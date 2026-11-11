@@ -1,0 +1,40 @@
+
+@use '../abstracts' as a;
+
+:root {
+  @include a.theme-vars(a.$light);
+  color-scheme: light;
+
+  @each $k, $v in a.$space {
+    --space-#{$k}: #{$v};
+  }
+
+  @each $k, $v in a.$font-size {
+    --text-#{$k}: #{$v};
+  }
+
+  @each $k, $v in a.$radius {
+    --radius-#{$k}: #{$v};
+  }
+
+  @each $k, $v in a.$shadow {
+    --shadow-#{$k}: #{$v};
+  }
+
+  --font-body: system-ui, 'Segoe UI', sans-serif;
+  --font-head: 'Iowan Old Style', Georgia, serif;
+  --container: 70rem;
+}
+
+// System preference applies only when the user has not chosen a theme.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include a.theme-vars(a.$dark);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  @include a.theme-vars(a.$dark);
+  color-scheme: dark;
+}

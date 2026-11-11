@@ -1,0 +1,406 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lumen Design System</title>
+
+    <link rel="stylesheet" href="../css/ds.css">
+
+    <style>
+        @layer utilities {
+            .demo {
+                border: 1px dashed var(--color-border);
+                border-radius: var(--radius-md);
+                padding: var(--space-5);
+                margin: var(--space-3) 0;
+            }
+
+            pre {
+                margin: 0;
+                padding: var(--space-3);
+                overflow: auto;
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-radius: var(--radius-md);
+                font-size: .8rem;
+            }
+
+            .sw {
+                height: 3rem;
+                border-radius: var(--radius-md);
+                border: 1px solid var(--color-border);
+            }
+
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                background: var(--color-surface);
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-block: var(--space-3);
+            }
+
+            section {
+                padding-block: var(--space-5);
+            }
+
+            .resize {
+                resize: horizontal;
+                overflow: auto;
+                max-width: 100%;
+                width: 100%;
+                border: 1px solid var(--color-border);
+                padding: var(--space-3);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <strong>Lumen DS</strong>
+            <button class="btn btn--outline btn--sm" id="theme" aria-pressed="false">
+                Toggle theme
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section>
+            <h1>Lumen design system</h1>
+            <p>
+                Tokens are CSS custom properties; components follow BEM
+                (<code>block__element--modifier</code>); cascade order is
+                <code>reset, base, layout, components, utilities</code>.
+                Each demo below prints its own markup.
+            </p>
+        </section>
+
+        <section>
+            <h2>Color tokens</h2>
+            <div class="grid" id="swatches"></div>
+        </section>
+
+        <section>
+            <h2>Typography</h2>
+
+            <div class="demo" data-demo>
+                <h1>Heading 1 · 2.44rem</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <h4>Heading 4</h4>
+
+                <p>
+                    Body text uses a 1.25 modular scale.
+                    <a href="#">A link</a>,
+                    <span class="label">a label</span>,
+                    <span class="caption">a caption</span>,
+                    <span class="text-muted">muted text</span>.
+                </p>
+
+                <blockquote>
+                    Consistency is a feature, not a constraint.
+                </blockquote>
+            </div>
+        </section>
+
+        <section>
+            <h2>Spacing, radius, shadow</h2>
+            <div class="demo cluster" id="scale"></div>
+        </section>
+
+        <section>
+            <h2>Buttons</h2>
+
+            <p class="caption">
+                Colors:
+                <code>.btn--{primary|secondary|accent|success|warning|danger|info}</code>
+                · styles: <code>--outline --ghost</code>
+                · sizes: <code>--sm --lg</code>
+                · states: <code>--loading</code>, <code>disabled</code>
+            </p>
+
+            <div class="demo cluster" data-demo>
+                <button class="btn">Primary</button>
+                <button class="btn btn--secondary">Secondary</button>
+                <button class="btn btn--outline">Outline</button>
+                <button class="btn btn--ghost">Ghost</button>
+                <button class="btn btn--danger">Danger</button>
+                <button class="btn btn--success">Success</button>
+                <button class="btn" disabled>Disabled</button>
+                <button class="btn btn--loading">Loading</button>
+                <button class="btn btn--sm">Small</button>
+                <button class="btn">Medium</button>
+                <button class="btn btn--lg">Large</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>Forms</h2>
+
+            <div class="demo grid" data-demo>
+
+                <div class="field">
+                    <label class="field__label" for="n">Name</label>
+                    <input class="input" id="n" placeholder="Ada Lovelace">
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="e">Email</label>
+                    <input class="input is-valid" id="e" type="email" value="ada@example.com">
+                    <span class="field__hint is-valid">Looks good.</span>
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="p">Password</label>
+                    <input class="input is-invalid" id="p" type="password" value="123">
+                    <span class="field__hint is-invalid">
+                        Use at least 8 characters.
+                    </span>
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="s">Plan</label>
+                    <select class="input" id="s">
+                        <option>Starter</option>
+                        <option>Team</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="t">Message</label>
+                    <textarea class="input input--textarea" id="t"></textarea>
+                </div>
+
+                <div class="stack">
+                    <label class="check">
+                        <input type="checkbox" checked>
+                        Remember me
+                    </label>
+
+                    <label class="check">
+                        <input type="radio" name="r" checked>
+                        Monthly
+                    </label>
+
+                    <label class="check">
+                        <input type="radio" name="r">
+                        Yearly
+                    </label>
+
+                    <label class="switch">
+                        <input class="switch__input" type="checkbox" role="switch" checked>
+                        Notifications
+                    </label>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>Cards <small class="caption">(container queries)</small></h2>
+
+            <p>
+                Profile cards switch layout by <em>their own</em> width
+                (<code>@container</code>), so they work in a sidebar or a main column.
+                Drag the corner of the box to resize it. Viewport
+                <code>@media</code> queries remain right for page-level changes such as
+                navigation, grid columns and <code>prefers-color-scheme</code>.
+            </p>
+
+            <div class="resize cq" data-demo>
+                <article class="card profile">
+                    <div class="profile__avatar">AL</div>
+
+                    <div>
+                        <h3 class="card__title">Ada Lovelace</h3>
+                        <p class="card__meta">Analyst · London</p>
+                        <button class="btn btn--sm">Follow</button>
+                    </div>
+                </article>
+            </div>
+
+            <div class="demo grid" data-demo>
+
+                <article class="card card--stat">
+                    <p class="card__meta">Active users</p>
+                    <div class="card__value">12.4k</div>
+                </article>
+
+                <article class="card card--pricing card--featured">
+                    <h3 class="card__title">Team</h3>
+                    <div class="card__price">$24</div>
+
+                    <ul>
+                        <li>10 projects</li>
+                        <li>Priority support</li>
+                    </ul>
+
+                    <button class="btn">Choose plan</button>
+                </article>
+
+                <article class="card">
+                    <h3 class="card__title">Basic card</h3>
+                    <p class="card__meta">Title, meta, content.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>Feedback</h2>
+
+            <div class="demo stack" data-demo>
+
+                <div class="alert alert--success">
+                    Saved. Your changes are live.
+                </div>
+
+                <div class="alert alert--warning">
+                    Storage is 90% full.
+                </div>
+
+                <div class="alert alert--danger">
+                    Payment failed. Check your card details.
+                </div>
+
+                <div class="alert">
+                    Maintenance starts at 02:00.
+                </div>
+
+                <div class="cluster">
+                    Inbox
+                    <span class="badge">3</span>
+                    <span class="badge badge--success">New</span>
+                    <span class="badge badge--info">Beta</span>
+                </div>
+
+                <div class="progress" role="progressbar" aria-valuenow="65" style="--value:65%">
+                    <div class="progress__bar"></div>
+                </div>
+
+                <button class="btn btn--ghost tooltip" data-tip="Copied to clipboard">
+                    Hover or focus me
+                </button>
+
+                <button class="btn btn--secondary" id="open">
+                    Open modal
+                </button>
+
+                <dialog class="modal" id="dlg">
+                    <h3>Delete project?</h3>
+                    <p>This cannot be undone.</p>
+
+                    <div class="cluster">
+                        <button class="btn btn--danger">Delete</button>
+                        <button class="btn btn--outline" id="close">Cancel</button>
+                    </div>
+                </dialog>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const root = document.documentElement,
+            btn = document.getElementById('theme');
+
+        const sys = () =>
+            matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+
+        const apply = t => {
+            root.dataset.theme = t;
+            btn.setAttribute('aria-pressed', t === 'dark');
+        };
+
+        let saved = null;
+
+        try {
+            saved = localStorage.getItem('theme');
+        } catch { }
+
+        if (saved) apply(saved);   // no saved choice -> CSS follows the system theme
+
+        btn.onclick = () => {
+            const t = (root.dataset.theme || sys()) === 'dark' ? 'light' : 'dark';
+
+            apply(t);
+
+            try {
+                localStorage.setItem('theme', t);
+            } catch { }
+        };
+
+        const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+        document.querySelectorAll('[data-demo]').forEach(d => {
+            const p = document.createElement('pre');
+
+            p.innerHTML = '<code>' +
+                esc(d.innerHTML.trim().replace(/></g, '>\n<')) +
+                '</code>';
+
+            d.after(p);
+        });
+
+        document.getElementById('swatches').innerHTML = [
+            'primary',
+            'secondary',
+            'accent',
+            'success',
+            'warning',
+            'danger',
+            'info',
+            'bg',
+            'surface',
+            'text'
+        ].map(c => `
+            <div>
+                <div class="sw" style="background:var(--color-${c})"></div>
+                <code>--color-${c}</code>
+            </div>
+        `).join('');
+
+        document.getElementById('scale').innerHTML = [
+            1, 2, 3, 4, 5, 6, 7
+        ].map(n => `
+            <div
+                class="card"
+                style="width:var(--space-${n});height:var(--space-${n});padding:0"
+                title="--space-${n}"
+            ></div>
+        `).join('') + [
+            'sm', 'md', 'lg'
+        ].map(r => `
+            <div
+                class="card"
+                style="width:4rem;height:3rem;border-radius:var(--radius-${r});box-shadow:var(--shadow-${r})"
+                title="radius/shadow ${r}"
+            ></div>
+        `).join('');
+
+        const dlg = document.getElementById('dlg');
+
+        document.getElementById('open').onclick = () => dlg.showModal();
+        document.getElementById('close').onclick = () => dlg.close();
+    </script>
+
+</body>
+
+</html>

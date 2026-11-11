@@ -1,0 +1,14 @@
+
+@use '../abstracts' as a;
+
+@each $k, $v in a.$space {
+  .mt-#{$k} {
+    margin-top: var(--space-#{$k}) !important;
+  }
+}
+
+// utilities may use !important by design
+
+.text-muted {
+  color: var(--color-muted);
+}

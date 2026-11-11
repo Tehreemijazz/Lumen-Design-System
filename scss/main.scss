@@ -1,0 +1,12 @@
+@use 'sass:meta';
+@layer reset, base, layout, components, utilities; // later layers win regardless of specificity
+@layer reset { @include meta.load-css('themes/themes'); }
+@layer base { @include meta.load-css('base/base'); }
+@layer layout { @include meta.load-css('layout/layout'); }
+@layer components {
+  @include meta.load-css('components/button');
+  @include meta.load-css('components/form');
+  @include meta.load-css('components/card');
+  @include meta.load-css('components/feedback');
+}
+@layer utilities { @include meta.load-css('utilities/utilities'); }

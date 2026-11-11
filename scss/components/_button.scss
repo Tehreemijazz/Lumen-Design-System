@@ -1,0 +1,98 @@
+
+@use '../abstracts' as a;
+
+.btn {
+    --btn-bg: var(--color-primary);
+    --btn-fg: var(--color-on-fill);
+    --btn-pad: var(--space-3) var(--space-5);
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--btn-pad);
+
+    font: 600 var(--text-sm)/1 var(--font-body);
+    border: 2px solid var(--btn-bg);
+    border-radius: var(--radius-md);
+
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    cursor: pointer;
+
+    transition: filter .15s, background .15s;
+
+    @include a.focus-ring;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+
+    @each $c in a.$status {
+        &--#{$c} {
+            --btn-bg: var(--color-#{$c});
+        }
+    }
+
+    &--outline {
+        background: transparent;
+        color: var(--btn-bg);
+    }
+
+    &--ghost {
+        background: transparent;
+        border-color: transparent;
+        color: var(--btn-bg);
+
+        &:hover {
+            background: color-mix(in srgb, var(--btn-bg) 12%, transparent);
+        }
+    }
+
+    &--sm {
+        --btn-pad: var(--space-2) var(--space-3);
+        font-size: var(--text-xs);
+    }
+
+    &--lg {
+        --btn-pad: var(--space-4) var(--space-6);
+        font-size: var(--text-md);
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+        opacity: .5;
+        cursor: not-allowed;
+        filter: none;
+    }
+
+    &--loading {
+        position: relative;
+        color: transparent;
+        pointer-events: none;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 1em;
+            height: 1em;
+            border: 2px solid var(--btn-fg);
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+        }
+    }
+}
+
+.btn--outline.btn--loading::after,
+.btn--ghost.btn--loading::after {
+    border-color: var(--btn-bg);
+    border-right-color: transparent;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
